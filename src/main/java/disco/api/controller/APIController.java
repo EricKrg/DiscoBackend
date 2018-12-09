@@ -6,6 +6,8 @@ import disco.api.externalapi.googleplace.GooglePlaceAPIService;
 import disco.api.externalapi.googleplace.GooglePlaceGETResponse;
 import disco.api.externalapi.instagram.InstagramAPIService;
 import disco.api.externalapi.instagram.InstagramGETResponse;
+import disco.api.externalapi.orsPoi.OrsPoiApiService;
+import disco.api.externalapi.orsPoi.OrsPoiGETResponse;
 import disco.api.externalapi.twitter.TwitterAPIService;
 import disco.api.externalapi.twitter.TwitterGETResponse;
 import disco.api.externalapi.weather.WeatherAPIService;
@@ -102,6 +104,18 @@ public class APIController {
                 rad
         );
         return weatherAPIService.getWeatherForecast();
+    }
+    @RequestMapping(method = RequestMethod.GET, value ="orspoi", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<OrsPoiGETResponse> getOrsPoi(
+            @RequestParam("lat") Double lat,
+            @RequestParam("lng") Double lng,
+            @RequestParam("rad") Double rad) {
+        OrsPoiApiService orsPoiService = new OrsPoiApiService(
+                lat,
+                lng,
+                rad
+        );
+        return orsPoiService.getAllPois();
     }
 
 }
